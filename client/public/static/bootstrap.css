@@ -1,0 +1,12 @@
+.no-box-shadow {
+  box-shadow: none !important;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+.blog-it-brand {
+  font-weight: lighter;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
