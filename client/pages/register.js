@@ -1,12 +1,17 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
 import axios from "axios";
+import Head from "next/head";
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from "../helpers/messageHandler";
 
 const Register = () => {
   const [state, setState] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: "Test",
+    email: "mj@tcs.com",
+    password: "aasdfsdf",
     error: "",
     success: "",
     buttonText: "Register",
@@ -22,9 +27,45 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.table({ name, email, password });
+    setState({
+      ...state,
+      buttonText: "Submitting",
+    });
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/register", {
+        name,
+        email,
+        password,
+      });
+
+      setState({
+        ...state,
+        name: "",
+        email: "",
+        password: "",
+        error: "",
+        success: response.data,
+        buttonText: "Submitted",
+      });
+    } catch (err) {
+      setState({
+        ...state,
+        success: "",
+        error: err.response.data.error,
+        buttonText: "Register",
+      });
+    }
+  };
+
+  const handleSubmitWithPromise = (event) => {
+    event.preventDefault();
+    setState({
+      ...state,
+      buttonText: "Submitting",
+    });
     axios
       .post("http://localhost:8000/api/register", {
         name,
@@ -32,11 +73,26 @@ const Register = () => {
         password,
       })
       .then((res) => {
-        console.log("res");
-        console.log(res);
+        setState({
+          ...state,
+          name: "",
+          email: "",
+          password: "",
+          error: "",
+          success: res.data,
+          buttonText: "Submitted",
+        });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.data) {
+          console.log(err.response.data.error);
+          setState({
+            ...state,
+            success: "",
+            error: err.response.data.error,
+            buttonText: "Register",
+          });
+        }
       });
   };
 
@@ -108,8 +164,13 @@ const Register = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Register</title>
+      </Head>
       <div className="col-md-6 ms-auto">
         <h1>Register</h1>
+        {success && showSuccessMessage(success)}
+        {error && showErrorMessage(error)}
         {RegisterForm()}
       </div>
     </Layout>
