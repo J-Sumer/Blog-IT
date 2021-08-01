@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
   const [state, setState] = useState({
@@ -23,7 +24,18 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.table({ name, email, password });
+    // console.table({ name, email, password });
+    axios
+      .post("http://localhost:8000/api/register", {
+        name,
+        email,
+        password,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+        console.log(err);
+      });
   };
 
   const { name, email, password, error, success, buttonText } = state;

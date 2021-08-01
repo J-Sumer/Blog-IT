@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
       <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />
@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
         integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ=="
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
         referrerpolicy="no-referrer"
       /> */}
     </Head>
@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
     <Script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
+      crossOrigin="anonymous"
     ></Script>
   );
 
