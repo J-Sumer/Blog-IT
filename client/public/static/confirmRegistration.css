@@ -1,0 +1,48 @@
+.red {
+  color: red;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  display: flex;
+  width: 50%;
+  border: 0px solid grey;
+  margin-left: 50%;
+  margin-top: 50px;
+  transform: translate(-50%, 0);
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.text-cr {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.text-cr p {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.card button {
+  width: 70%;
+  margin-left: 50%;
+  margin-bottom: 20px;
+  transform: translate(-50%, 0%);
+  min-width: fit-content;
+  transition: 0.3s;
+}
+
+.welcome-image {
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.card button:hover {
+  transform: translate(-50%, 0%) scale(1.1);
+}

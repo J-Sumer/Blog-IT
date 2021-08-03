@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
       />
       <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
       <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />
+      <link rel="stylesheet" type="text/css" href="/static/styles.css" />
       {/* 
       Instead of importing the cdn link, we are using css present in nprogress in node_modules
       or
