@@ -4,7 +4,7 @@ const crypto = require("crypto");
 
 const userSchema = new Schema(
   {
-    username: {
+    userid: {
       type: String,
       trim: true,
       required: true,
@@ -17,7 +17,6 @@ const userSchema = new Schema(
       trim: true,
       required: true,
       max: 25,
-      unique: true,
       index: true,
     },
     email: {

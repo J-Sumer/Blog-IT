@@ -38,10 +38,10 @@ var paramsForRegisterMail = (token, email) => ({
   },
 });
 
-const sendEmailToRegister = (name, email, password) => {
+const sendEmailToRegister = (name, userid, email, password) => {
   // Generate token with name, email and password
   const token = jwt.sign(
-    { name, email, password },
+    { name, userid, email, password },
     process.env.JWT_ACCOUT_ACTIVATION,
     {
       expiresIn: "10m",
@@ -52,10 +52,6 @@ const sendEmailToRegister = (name, email, password) => {
   return new AWS.SES(SESConfig)
     .sendEmail(paramsForRegisterMail(token, email))
     .promise();
-
-  // .then((res) => {
-  //     console.log(res);
-  //   });
 };
 
 module.exports = {

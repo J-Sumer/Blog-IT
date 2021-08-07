@@ -13,8 +13,11 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(console.log("Connected"))
-  .catch((err) => console.log(err));
+  .then(console.log("Connected to Mongodb"))
+  .catch((err) => {
+    console.log("Mongodb connection failure");
+    console.log(err);
+  });
 
 //Import routes
 const authRoutes = require("./routes/auth.js");

@@ -11,13 +11,16 @@ import profilePic from "../public/images/Mobile-login.jpg";
 
 const Register = () => {
   const [state, setState] = useState({
-    name: "Test",
-    email: "mj@tcs.com",
-    password: "aasdfsdf",
+    name: "",
+    userid: "",
+    email: "",
+    password: "",
     error: "",
     success: "",
     buttonText: "Register",
   });
+
+  const { name, userid, email, password, error, success, buttonText } = state;
 
   const handleChange = (type) => (event) => {
     setState({
@@ -39,6 +42,7 @@ const Register = () => {
     try {
       const response = await axios.post("http://localhost:8000/api/register", {
         name,
+        userid,
         email,
         password,
       });
@@ -46,6 +50,7 @@ const Register = () => {
       setState({
         ...state,
         name: "",
+        userid: "",
         email: "",
         password: "",
         error: "",
@@ -87,7 +92,6 @@ const Register = () => {
       })
       .catch((err) => {
         if (err.response.data) {
-          console.log(err.response.data.error);
           setState({
             ...state,
             success: "",
@@ -98,14 +102,18 @@ const Register = () => {
       });
   };
 
-  const { name, email, password, error, success, buttonText } = state;
+  const buttonStyles = () => {
+    let buttonStyles =
+      "btn btn-sm btn-full-width btn-outline-dark no-box-shadow ";
+    return buttonText === "Register" ? buttonStyles : buttonStyles + "disabled";
+  };
 
   const RegisterForm = () => (
     <div style={{ width: "70%" }}>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
-            User Name
+            Full Name
           </label>
           <input
             onChange={handleChange("name")}
@@ -113,7 +121,18 @@ const Register = () => {
             type="text"
             className="form-control no-box-shadow"
             id="name"
-            placeholder="Enter your name"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="userid" className="form-label">
+            User ID
+          </label>
+          <input
+            onChange={handleChange("userid")}
+            value={userid}
+            type="text"
+            className="form-control no-box-shadow"
+            id="name"
           />
         </div>
         <div className="mb-3">
@@ -127,7 +146,6 @@ const Register = () => {
             className="form-control no-box-shadow"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            placeholder="Enter your Email"
           />
           <div id="emailHelp" className="form-text">
             Don't worry, we'll never share your email with anyone else.
@@ -143,13 +161,9 @@ const Register = () => {
             type="password"
             className="form-control no-box-shadow"
             id="exampleInputPassword1"
-            placeholder="Type your password"
           />
         </div>
-        <button
-          type="submit"
-          className="btn btn-sm btn-full-width btn-outline-dark no-box-shadow"
-        >
+        <button type="submit" className={buttonStyles()}>
           {buttonText}
         </button>
       </form>
