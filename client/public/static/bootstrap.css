@@ -5,3 +5,7 @@
 .btn-full-width {
   width: 100%;
 }
+
+.form-control {
+  font-weight: 200;
+}

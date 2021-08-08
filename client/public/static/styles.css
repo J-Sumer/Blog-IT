@@ -1,5 +1,5 @@
 .blog-it-brand {
-  font-weight: lighter;
+  font-weight: 200;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
@@ -13,4 +13,71 @@
 
 .font-80 {
   font-size: 80%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
+.alert-box {
+  padding: 10px;
+  font-size: medium;
+}
+
+.height-90 {
+  height: 90px;
+}
+
+.margin-left-20 {
+  margin-left: 20%;
+}
+.margin-left-35 {
+  margin-left: 35%;
+}
+.margin-left-30 {
+  margin-left: 30%;
+}
+.margin-left-25 {
+  margin-left: 25%;
+}
+
+.btn-login {
+  width: 40%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.login-box {
+  padding: 2% 3% 2% 3%;
+  border-radius: 10px;
+  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+
+.login-box:hover {
+  box-shadow: 0 0px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.auth-text {
+  font-weight: 200;
+  padding-bottom: 20px;
+}
+
+.login-box a {
+  color: rgb(90, 90, 90);
+  text-decoration: none;
+  margin-top: 5%;
+  transition: 0.3s;
+}
+
+.login-box a:hover {
+  font-size: 105%;
+}
+
+.inline-block {
+  display: flex;
+}
+
+.login-icon {
+  transform: scale(1.8);
 }

@@ -64,3 +64,32 @@ exports.registerActivate = (req, res) => {
     }
   );
 };
+
+exports.login = (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(404).json({
+      error: "All fields must be entered",
+    });
+  }
+  User.findOne({ email }).exec(async (err, user) => {
+    if (err || !user)
+      return res.status(400).json({
+        error: "User with this email id doesn't exist. Please register",
+      });
+
+    if (!user.authenticate(password))
+      return res.status(400).json({
+        error: "Eamil and password did not match",
+      });
+
+    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+    const { _id, name, email, userid } = user;
+    return res.json({
+      token,
+      user: { _id, name, email, userid },
+    });
+  });
+};

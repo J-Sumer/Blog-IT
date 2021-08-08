@@ -62,8 +62,8 @@ virtualPassword.get(function () {
 });
 
 userSchema.methods = {
-  authenticate: function(password) {
-    return this.encryptPassword(password) = this.hashed_password;
+  authenticate: function (password) {
+    return this.encryptPassword(password) == this.hashed_password;
   },
   encryptPassword: function (password) {
     if (!password) return "";
@@ -81,4 +81,4 @@ userSchema.methods = {
   },
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

@@ -40,7 +40,7 @@ const Register = () => {
     });
 
     try {
-      const response = await axios.post("http://localhost:8000/api/register", {
+      const response = await axios.post(`${process.env.API}/register`, {
         name,
         userid,
         email,
@@ -74,7 +74,7 @@ const Register = () => {
       buttonText: "Submitting",
     });
     axios
-      .post("http://localhost:8000/api/register", {
+      .post(`${process.env.API}/register`, {
         name,
         email,
         password,
@@ -184,7 +184,7 @@ const Register = () => {
         />
       </div>
       <div className="col-md-6 ms-auto font-80">
-        <h1>Register</h1>
+        <h1 className="auth-text margin-left-20">Register</h1>
         {success && showSuccessMessage(success)}
         {error && showErrorMessage(error)}
         {RegisterForm()}
