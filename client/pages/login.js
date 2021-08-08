@@ -7,8 +7,7 @@ import {
   showErrorMessage,
   showSuccessMessage,
 } from "../helpers/messageHandler";
-import Image from "next/image";
-import loginSVG from "../public/images/login.svg";
+import { authenticate, isAuth } from "../helpers/auth";
 
 const Login = () => {
   const [state, setState] = useState({
@@ -17,6 +16,15 @@ const Login = () => {
     success: "",
     error: "",
   });
+
+  console.log(isAuth());
+
+  useEffect(() => {
+    isAuth() &&
+      (isAuth().role === "admin"
+        ? Router.push("/admin")
+        : Router.push("/user"));
+  }, []);
 
   const { email, password, success, error } = state;
 
@@ -37,7 +45,13 @@ const Login = () => {
         password,
       });
       console.log(result);
+      authenticate(result, () =>
+        isAuth() && isAuth().role === "admin"
+          ? Router.push("/admin")
+          : Router.push("/")
+      );
     } catch (err) {
+      console.log(err);
       setState({
         ...state,
         error: err.response.data.error,

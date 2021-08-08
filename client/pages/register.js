@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
 import {
@@ -8,6 +8,8 @@ import {
 } from "../helpers/messageHandler";
 import Image from "next/image";
 import profilePic from "../public/images/Mobile-login.jpg";
+import { authenticate, isAuth } from "../helpers/auth";
+import Router from "next/router";
 
 const Register = () => {
   const [state, setState] = useState({
@@ -19,6 +21,10 @@ const Register = () => {
     success: "",
     buttonText: "Register",
   });
+
+  useEffect(() => {
+    isAuth() && Router.push("/");
+  }, []);
 
   const { name, userid, email, password, error, success, buttonText } = state;
 

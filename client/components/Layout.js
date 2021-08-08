@@ -4,6 +4,8 @@ import Head from "next/head";
 import Script from "next/script";
 import Router from "next/router";
 import NProgress from "nprogress";
+import { isAuth, logout } from "../helpers/auth";
+import { useEffect } from "react";
 // import "nprogress/nprogress.css";
 
 Router.onRouteChangeStart = (url) => NProgress.start();
@@ -35,6 +37,55 @@ const Layout = ({ children }) => {
     </Head>
   );
 
+  const links = () => {
+    if (isAuth()) {
+      return (
+        <React.Fragment>
+          <li className="nav-item">
+            <a onClick={logout} className="nav-link" href="#">
+              Logout
+            </a>
+          </li>
+          {isAuth().role === "admin" ? (
+            <li className="nav-item">
+              <Link href="/admin">
+                <a className="nav-link" href="#">
+                  Admin
+                </a>
+              </Link>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <Link href="/user">
+                <a className="nav-link" href="#">
+                  Account
+                </a>
+              </Link>
+            </li>
+          )}
+        </React.Fragment>
+      );
+    }
+    return (
+      <React.Fragment>
+        <li className="nav-item">
+          <Link href="/login">
+            <a className="nav-link" href="#">
+              Login
+            </a>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/register">
+            <a className="nav-link" href="#">
+              Register
+            </a>
+          </Link>
+        </li>
+      </React.Fragment>
+    );
+  };
+
   const nav = () => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
@@ -55,22 +106,7 @@ const Layout = ({ children }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
-            <li className="nav-item">
-              <Link href="/login">
-                <a className="nav-link" href="#">
-                  Login
-                </a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/register">
-                <a className="nav-link" href="#">
-                  Register
-                </a>
-              </Link>
-            </li>
-          </ul>
+          <ul className="navbar-nav mb-2 mb-lg-0 ms-auto">{links()}</ul>
         </div>
       </div>
     </nav>
