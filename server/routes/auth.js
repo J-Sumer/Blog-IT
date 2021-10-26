@@ -3,7 +3,14 @@ const router = express.Router();
 const { validationResult } = require("express-validator");
 
 //import from controllers
-const { register, registerActivate, login } = require("../controllers/auth.js");
+const {
+  register,
+  registerActivate,
+  login,
+  requireSignin,
+  authMiddleware,
+  adminMiddleware,
+} = require("../controllers/auth.js");
 
 //validators
 const { userRegisterValidator } = require("../validators/auth.js");

@@ -21,6 +21,7 @@ mongoose
 
 //Import routes
 const authRoutes = require("./routes/auth.js");
+const userRoutes = require("./routes/user.js");
 const { body } = require("express-validator");
 
 app.use(morgan("dev"));
@@ -31,6 +32,7 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 
 //Middleware
 app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 // Listen
 const port = process.env.PORT || 5000;

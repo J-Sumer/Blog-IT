@@ -18,10 +18,35 @@ export const removeCookie = (key) => {
 };
 
 //get cookie
-export const getCookie = (key) => {
-  if (process.browser) {
-    return cookie.get(key);
+export const getCookie = (key, req) => {
+  // if (process.browser) {
+  //   return cookie.get(key);
+  // }
+  return process.browser
+    ? getCookieFromBrowser(key)
+    : getCookieFromServer(key, req);
+};
+
+const getCookieFromBrowser = (key) => {
+  console.log("From browser");
+  return cookie.get(key);
+};
+
+const getCookieFromServer = (key, req) => {
+  console.log("From Server");
+  if (!req.headers.cookie) {
+    return undefined;
   }
+  let token = req.headers.cookie
+    .split(";")
+    .find((c) => c.trim().startsWith(`${key}=`));
+
+  if (!token) {
+    return undefined;
+  }
+  let tokenValue = token.split("=")[1];
+  console.log("tokenValue" + tokenValue);
+  return tokenValue;
 };
 
 //set in localstorage
@@ -41,7 +66,6 @@ export const removeLocalStorage = (key) => {
 export const authenticate = (response, next) => {
   setCookie("token", response.data.token);
   setLocalStorage("user", response.data.user);
-  console.log("aasdfasdfa");
   next();
 };
 
